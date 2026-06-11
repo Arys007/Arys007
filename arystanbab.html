@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arystanbab Zhaumitbaiuly</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0A0A0F;
+      --surface:  #13131A;
+      --border:   #1E1E2A;
+      --accent:   #7B61FF;
+      --accent2:  #C084FC;
+      --text:     #E8E8F0;
+      --muted:    #6B6B80;
+      --white:    #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.15rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -20%; left: -10%;
+      width: 70vw; height: 70vw;
+      background: radial-gradient(circle, rgba(123,97,255,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 780px; }
+    .hero-tag {
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 1.4rem;
+    }
+    h1 .gradient {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.15rem; color: var(--muted);
+      max-width: 520px; margin-bottom: 2.5rem;
+    }
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--white);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(123,97,255,0.35); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2.5rem; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-desc { color: var(--muted); max-width: 500px; margin-bottom: 3rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+      max-width: 960px;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+    .stat-row { display: flex; gap: 2.5rem; margin-top: 2rem; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem; font-weight: 800;
+      color: var(--white); line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+    .about-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .skill-list li {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .skill-name { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+    .skill-bar {
+      width: 55%; height: 6px;
+      background: var(--border); border-radius: 999px; overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px;
+      transition: width 1s ease;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { max-width: 1100px; margin: 0 auto; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .card-icon {
+      width: 44px; height: 44px;
+      background: rgba(123,97,255,0.15);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 1.2rem;
+    }
+    .card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .card-tags { display: flex; gap: 0.5rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .tag {
+      padding: 0.2rem 0.7rem;
+      background: rgba(123,97,255,0.12);
+      border-radius: 999px;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--surface); }
+    .contact-wrap {
+      max-width: 600px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+    }
+    .form-group { margin-bottom: 1.3rem; }
+    label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    input, textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    textarea { min-height: 120px; }
+    .success-msg {
+      display: none;
+      padding: 1rem;
+      background: rgba(123,97,255,0.15);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      section { padding: 3.5rem 1.2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero { padding: 6rem 1.2rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Arystanbab<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">O mnie</a></li>
+    <li><a href="#projects">Projekty</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Strona Portfolio</div>
+    <h1>
+      Cześć, jestem —<br>
+      <span class="gradient">Arystanbab</span><br>
+      Zhaumitbaiuly
+    </h1>
+    <p class="hero-sub">
+      Interesuję się nowymi technologiami i tworzę rzeczy z pasją. To jest moja cyfrowa przestrzeń.
+    </p>
+    <div class="btn-row">
+      <a href="#projects" class="btn btn-primary">Zobacz projekty →</a>
+      <a href="#contact" class="btn btn-ghost">Napisz do mnie</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">O mnie</div>
+      <h2>Kim jestem?</h2>
+      <p>Nazywam się Arystanbab Zhaumitbaiuly. Staram się znaleźć równowagę między technologią a kreatywnością.</p>
+      <p>Realizowanie nowych pomysłów, projektowanie i zostawianie śladu w cyfrowym świecie — to mój główny cel.</p>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">2025<span>+</span></div>
+          <div class="stat-label">Od roku</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Pomysłów</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-card">
+      <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1.2rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Umiejętności</p>
+      <ul class="skill-list">
+        <li>
+          <span class="skill-name">Web Design</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Narzędzia AI</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Edycja wideo</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Tworzenie treści</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Prace</div>
+  <h2>Moje projekty</h2>
+  <p class="section-desc">Główne projekty, które stworzyłem lub nad którymi pracuję.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>Projekt wideo AI</h3>
+      <p>Unikalne treści wideo stworzone za pomocą sztucznej inteligencji. Użyte narzędzia: Runway, Kling i HeyGen.</p>
+      <div class="card-tags">
+        <span class="tag">AI</span>
+        <span class="tag">Wideo</span>
+        <span class="tag">Treści</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <h3>Strona osobista</h3>
+      <p>Ta strona portfolio. Szybki i nowoczesny design stworzony w czystym HTML/CSS.</p>
+      <div class="card-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Design</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">💡</div>
+      <h3>Następny projekt</h3>
+      <p>Nowy pomysł w przygotowaniu. Szczegóły wkrótce!</p>
+      <div class="card-tags">
+        <span class="tag">Nowy</span>
+        <span class="tag">Wkrótce...</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Kontakt</div>
+  <h2>Napisz do mnie</h2>
+  <p class="section-desc">Propozycja, pytanie albo po prostu cześć — wszystko mile widziane!</p>
+  <div class="contact-wrap">
+    <div class="form-group">
+      <label>Twoje imię</label>
+      <input type="text" id="fname" placeholder="Np. Jan" />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="femail" placeholder="email@example.com" />
+    </div>
+    <div class="form-group">
+      <label>Wiadomość</label>
+      <textarea id="fmsg" placeholder="Twoja wiadomość..."></textarea>
+    </div>
+    <button class="btn btn-primary" onclick="sendMsg()" style="width:100%;justify-content:center;">Wyślij →</button>
+    <div class="success-msg" id="successMsg">✅ Wiadomość wysłana! Dziękuję!</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Arystanbab Zhaumitbaiuly · Wszelkie prawa zastrzeżone
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .about-card, .contact-wrap').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  function sendMsg() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const msg = document.getElementById('fmsg').value.trim();
+    if (!name || !email || !msg) {
+      alert('Wypełnij wszystkie pola!');
+      return;
+    }
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('fname').value = '';
+    document.getElementById('femail').value = '';
+    document.getElementById('fmsg').value = '';
+  }
+</script>
+</body>
+</html>
